@@ -19,7 +19,8 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage }) => {
     // Send Message
   const handleSend = async (e) => {
     
-      e.preventDefault()
+    e.preventDefault()
+    if (newMessage !== '') {
       const message = {
         senderId : currentUser,
         text: newMessage,
@@ -39,6 +40,8 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage }) => {
     {
       console.log("error")
     }
+    }
+      
   }
 
   // fetching data for header

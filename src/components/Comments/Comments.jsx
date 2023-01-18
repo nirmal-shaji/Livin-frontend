@@ -16,8 +16,9 @@ const Comments = ({ postId,setCommentLoad }) => {
   const comment = useRef('');
   const [addComments,setAddComment]=useState('')
   const {userData}=useSelector((state)=>state.authReducer.authData)
-const addNewComment = async() => {
-  const data = {
+  const addNewComment = async () => {
+    if (addComments !== '') {
+    const data = {
     userId: userData._id,
     comments:addComments
   }
@@ -26,6 +27,8 @@ const addNewComment = async() => {
   setAddComment('')
   setCommentLoad(true);
 }
+  }
+  
 
 
   return (

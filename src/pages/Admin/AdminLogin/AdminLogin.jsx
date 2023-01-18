@@ -12,7 +12,8 @@ import { adminLogin } from '../../../redux/actions/authActions'
 
 const AdminLogin = () => {
    
-    const [userData, setUserData] = useState({ userName: "", password: ""});
+    const [userData, setUserData] = useState({ userName: "", password: "" });
+    const [validation, setValidation]=useState(false)
 
     const dispatch = useDispatch();
     const loading = useSelector((state) => state.adminAuthReducer.loading);
@@ -24,7 +25,9 @@ const AdminLogin = () => {
     const submitData = (event) => {
         
         event.preventDefault();
-    
+        if (userData.userName === '' || userData.password === "") {
+            setValidation(true)
+        }
 
          dispatch(adminLogin(userData));
         
@@ -52,7 +55,9 @@ const AdminLogin = () => {
                            Admin Login
                         </h3>
         
-
+                        <span style={{display:!validation?'none':'block' ,color:'red',fontSize:"12px"}}>
+                           * Fields missing
+                        </span>
                         <div>
                             <input type="text" placeholder='User Name' className='InfoInput' name='userName' onChange={userDataChange} value={userData.userName} />
 

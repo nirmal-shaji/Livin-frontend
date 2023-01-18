@@ -7,9 +7,9 @@ import Auth from "./pages/Auth/Auth";
 import AdminHome from "./pages/Admin/AdminHome/AdminHome"
 import UsersList from "./pages/Admin/UsersList/UsersList";
 import AdminLogin from "./pages/Admin/AdminLogin/AdminLogin";
-
+import {Error} from "./pages/404/Error"
 import { useSelector } from "react-redux";
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route ,Navigate} from 'react-router-dom'
 import PostList from "./pages/Admin/PostList/PostList";
 function App() {
   
@@ -28,8 +28,9 @@ function App() {
           <Route path='/chat' element={userData ? <Chat /> : <Auth />} />
           <Route path='/admin' element={adminData? <AdminHome /> : <AdminLogin />} />
           <Route path='/admin/users' element={adminData ? <UsersList /> :<AdminLogin/>} />
-          <Route path='/admin/posts' element={adminData ? <PostList/> : <AdminLogin />} />
-          
+          <Route path='/admin/posts' element={adminData ? <PostList /> : <AdminLogin />} />
+          <Route path="/error" element={<Error />} />
+          <Route path="/*" element={<Navigate to="/error" />} />
           
       </Routes>
     

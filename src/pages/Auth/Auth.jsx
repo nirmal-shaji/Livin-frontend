@@ -14,6 +14,7 @@ const Auth = () => {
     const [isSignUp, setSignUp] = useState();
     const [userData, setUserData] = useState({ firstName: "", lastName: "", userName: "", password: "", confirmPassword: "" });
     const [isConfirmPassword, setIsConfirmPassword] = useState(true);
+    const [validation, setValidation] = useState(false);
     const dispatch = useDispatch();
     const loading = useSelector((state) => state.authReducer.loading);
     const userDataChange=(event)=> {
@@ -32,11 +33,16 @@ const Auth = () => {
            
         else {
             if (isSignUp) {
-        
+                if (userData.firstName === ""||userData.lastName===""||userData.userName===""||userData.confirmPassword||userData.password) {
+           setValidation(true) 
+        }
                 userData.confirmPassword === userData.password ? dispatch(SignUp(userData)) : setIsConfirmPassword(false) 
             }
                
             else {
+                if (userData.userName === "" || userData.password === "") {
+                    setValidation(true)
+                }
                 dispatch(Login(userData))
             }
         }
@@ -65,6 +71,9 @@ const Auth = () => {
                         <h3>
                             {isSignUp ? 'Sign up ' : 'Login'}
                         </h3>
+                        <span style={{display:!validation?'none':'block' ,color:'red',fontSize:"12px"}}>
+                           * Fields missing
+                        </span>
                         {isSignUp && <div>
                             <input type="text" placeholder='First Name' className='InfoInput' name='firstName' onChange={userDataChange} value={userData.firstName} />
                             <input type="text" placeholder='Last Name' className='InfoInput' name='lastName' onChange={userDataChange} value={userData.lastName} />
