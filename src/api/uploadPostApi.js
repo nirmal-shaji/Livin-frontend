@@ -10,8 +10,6 @@ API.interceptors.request.use((req) => {
     return req;
   });
 
-export const uploadPost = (postData) => API.post('/api/v1/post', postData, {
-    withCredentials: true,
-});
+export const uploadPost = (postData) => API.post('/api/v1/post', postData);
   
 
