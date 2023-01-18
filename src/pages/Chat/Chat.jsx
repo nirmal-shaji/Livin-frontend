@@ -35,7 +35,7 @@ const Chat = () => {
 
   
   useEffect(() => {
-    socket.current = io("https://livin.audiograms.xyz");
+    socket.current = io("https://livin.audiograms.xyz/");
   
     socket.current.emit("addNewUser", userData._id);
     socket.current.on("allUsers", (user) => {
