@@ -38,19 +38,28 @@ const Post = ({ data, id }) => {
 
   const deletePost = async () => {
   
+
+    dispatch(deletePosts(id))
     toast("Post Deleted Successfully",{
            
-           style: {
-             borderRadius: "10px",
-             background: "#333",
-             color: "#fff",
-           },
-         })
-    dispatch(deletePosts(id))
+      style: {
+        borderRadius: "10px",
+        background: "#333",
+        color: "#fff",
+      },
+    })
   }
   const savePosts = async () => {
 
     await savePost(id, userData._id);
+    toast("Post Saved",{
+           
+      style: {
+        borderRadius: "10px",
+        background: "#333",
+        color: "#fff",
+      },
+    })
   }
 
   const reportSubmit = async () => {
@@ -59,6 +68,14 @@ const Post = ({ data, id }) => {
     await reportPost(id, data)
     setReportText("")
     setOpened(false)
+    toast("Post reported",{
+           
+      style: {
+        borderRadius: "10px",
+        background: "#333",
+        color: "#fff",
+      },
+    })  
     }
     
   }
@@ -69,6 +86,14 @@ const Post = ({ data, id }) => {
     dispatch({ type: "EDIT_POST", datas })
     setReportText("")
     setEdit(false)
+    toast("Post Updated Successfully",{
+           
+      style: {
+        borderRadius: "10px",
+        background: "#333",
+        color: "#fff",
+      },
+    })
   }
   const allComments = async () => {
 
