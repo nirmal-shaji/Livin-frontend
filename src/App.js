@@ -26,6 +26,7 @@ function App() {
           <Route path='/profile' element={userData ? <Profile /> : <Auth />} />
           <Route path='/profile/:id' element={userData?<Profile/>:<Auth/>} />
           <Route path='/' element={userData ? <Home /> : <Auth />} />
+          <Route path='/savedPosts' element={userData ? <Home location='savedPosts' /> : <Auth />} />
           <Route path='/chat' element={userData ? <Chat /> : <Auth />} />
           <Route path='/admin' element={adminData? <AdminHome /> : <AdminLogin />} />
           <Route path='/admin/users' element={adminData ? <UsersList /> :<AdminLogin/>} />

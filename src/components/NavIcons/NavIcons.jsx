@@ -5,6 +5,7 @@ import Noti from "../../img/noti.png";
 import Comment from "../../img/comment.png";
 import { UilSetting } from "@iconscout/react-unicons";
 import { Link, useNavigate } from "react-router-dom";
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 
 const NavIcons = () => {
@@ -15,7 +16,7 @@ const NavIcons = () => {
         <img src={Home} alt="" />
       </Link>
       <UilSetting />
-      <img src={Noti} alt="" />
+      <BookmarkIcon onClick={()=>navigate('/savedPosts')} />
 
 
       <img src={Comment} alt="" onClick={() => navigate('/chat')} />

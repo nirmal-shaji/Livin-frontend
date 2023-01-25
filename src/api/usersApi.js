@@ -29,3 +29,5 @@ export const savePost=(postId,userId)=>API.get(`/api/v1/post/save/post`,{
 export const reportPost = (postId, text) => API.post(`/api/v1/post/report/${postId}`, text);
 export const deletePost = (postId) => API.get(`/api/v1/deletePost/${postId}`);
 export const editPost = (postId, data) => API.post('/api/v1/post/edit/post', data);
+export const searchUser = (query) => API.get(`/api/v1/search/user/${query}`);
+export const savedPost = (id) => API.get(`/api/v1/post/save/allPost/${id}`);

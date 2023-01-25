@@ -6,15 +6,16 @@ import { useLocation,useParams } from 'react-router-dom'
 import './PostSide.css'
 import { useSelector } from 'react-redux'
 
-const PostSide = () => {
+const PostSide = ({location}) => {
   const params = useParams();
-  const location = useLocation()
+  const locations = useLocation()
   const { userData } = useSelector((state) => state.authReducer.authData);
   return (
     <div className='PostSide'>
-      {location.pathname==='/home'?<PostShare/>:""}
-     { params.id===userData._id?<PostShare />:""}
-      <Posts />
+      {location==='savedPosts'?<h5>Saved Posts</h5>:"" } 
+      {locations.pathname==='/home'?<PostShare/>:""}
+      { params.id===userData._id?<PostShare />:""}
+      <Posts location={location} />
      
     </div>
   )
