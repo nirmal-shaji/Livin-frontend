@@ -37,7 +37,7 @@ const ProfileModal = ({ modalOpened, setModalOpened, data }) => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     let userData = formData;
-   
+     
     if (profileImage) {
       const data = new FormData();
       const fileName = Date.now() + profileImage.name;

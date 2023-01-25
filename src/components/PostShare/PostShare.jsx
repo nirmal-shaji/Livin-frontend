@@ -9,8 +9,9 @@ import { UilSchedule } from '@iconscout/react-unicons'
 import { UilTimes } from '@iconscout/react-unicons'
 import { useSelector, useDispatch } from 'react-redux'
 import { postUpload, textUpload } from '../../redux/actions/uploadActions'
-import {  toast} from 'react-hot-toast';
-import axios from 'axios'
+import { toast } from 'react-hot-toast';
+import coverPicture from "../../img/defaultProfile.png"
+
 
 const PostShare = () => {
     const [image, setImage] = useState(null);  
@@ -77,7 +78,7 @@ const PostShare = () => {
 
   return (
       <div className="PostShare">
-          <img src={ProfileImage} alt=""/>
+          <img src={userData?.profilePicture ? userData?.profilePicture:coverPicture}alt=""/>
           <div>
             <input ref={desc} type='text' placeholder="What's happening "required/>  
          <div className="PostOptions">

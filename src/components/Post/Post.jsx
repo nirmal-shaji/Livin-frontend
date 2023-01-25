@@ -34,7 +34,7 @@ const Post = ({ data, id }) => {
   const [opened, setOpened] = React.useState(false);
   const [deletes, setDelete] = useState(false);
   const [edit, setEdit] = useState(false);
-  console.log(data  )
+
 
   const deletePost = async () => {
   
@@ -113,127 +113,134 @@ const Post = ({ data, id }) => {
     setLiked((prev) => !prev);
     liked ? setLikes((prev) => prev - 1) : setLikes((prev) => prev + 1)
   };
+  const reports = data.reports.some(value => value.userId === userData._id) 
+  if (reports) {
+    return (
+      <div></div>
+    )
+  }
+  else {
+    return (
+      <div className="Post">
+        <Modal
+          opened={opened}
+          onClose={() => setOpened(false)}>
+          <div style={{ "textAlign": "center" }}>
+            <span>Explain why your reporting this post?</span>
 
-  return (
-    <div className="Post">
-      <Modal
-        opened={opened}
-        onClose={() => setOpened(false)}>
-        <div style={{ "textAlign": "center" }}>
-          <span>Explain why your reporting this post?</span>
+
+
+            <input style={{ "width": "100%", "marginTop": "10px" }} onChange={(e) => {
+              setReportText(e.target.value)
+            }} type="text" id="report" name='report' />
+            <button style={{ "marginTop": "10px" }} onClick={reportSubmit}>submit</button>
+
+
+          </div>
+
+        </Modal>
+        <Modal
+          opened={edit}
+          onClose={() => setEdit(false)}>
+          <div style={{ "textAlign": "center" }}>
+            <span>Edit the Description of your post?</span>
 
 
 
-          <input style={{ "width": "100%", "marginTop": "10px" }} onChange={(e) => {
-            setReportText(e.target.value)
-          }} type="text" id="report" name='report' />
-          <button style={{ "marginTop": "10px" }} onClick={reportSubmit}>submit</button>
+            <input style={{ "width": "100%", "marginTop": "10px" }} onChange={(e) => {
+              setReportText(e.target.value)
+            }} type="text" id="report" name='report' />
+            <button style={{ "marginTop": "10px" }} onClick={editSubmit}>submit</button>
+
+
+          </div>
+
+        </Modal>
+
+        <Modal
+          opened={deletes}
+          onClose={() => setDelete(false)}>
+          <div style={{ "textAlign": "center" }}>
+
+            <span> are you sure you want to delete the post?</span><br /><br />
+            <button style={{}} onClick={deletePost}>delete</button>
+
+          </div>
+
+        </Modal>
+
+        <div className="detail" style={{ "display": "flex", "justifyContent": "space-between", "paddingBottom": "3px" }}>
+          <div>
+            <span><img style={{ "width": "20px", }} src={data?.userId?.profilePicture ? data?.userId?.profilePicture : coverPicture} alt="" />  </span>
+            <span>{data?.userId?.firstName} {data?.userId?.lastName}</span>
+          </div>
+          <div>
+            <span className='icon' style={{}} onClick={() => {
+              setReport(!report)
+            }}><MoreVertIcon /> </span>
+          </div>
+
+
+
 
 
         </div>
+        {report ? <div className='Report' >
+          {userData._id === data?.userId?._id ? <div >
 
-      </Modal>
-      <Modal
-        opened={edit}
-        onClose={() => setEdit(false)}>
-        <div style={{ "textAlign": "center" }}>
-          <span>Edit the Description of your post?</span>
+            <div onClick={() => {
+              setDelete(true)
+            }}><DeleteForeverIcon /> Delete this post!</div>
+            <div onClick={() => {
+              setEdit(true)
+            }}><EditIcon /> Edit Post</div>
+          </div> : <div >
+            {/* <div onClick={savePosts}><SaveAltIcon /> Save later</div> */}
+
+            <div onClick={savePosts}><SaveAltIcon /> Save later</div>
+            <div onClick={() => {
+
+              setOpened(true)
+            }}><Report /> Report this post!</div>
+
+
+          </div>}
+
+        </div> : ""}
 
 
 
-          <input style={{ "width": "100%", "marginTop": "10px" }} onChange={(e) => {
-            setReportText(e.target.value)
-          }} type="text" id="report" name='report' />
-          <button style={{ "marginTop": "10px" }} onClick={editSubmit}>submit</button>
+        <img src={data.imageUrl} alt="" />
+        <div className="PostReact">
+          <img src={liked ? Heart : NotLike} alt="" onClick={handleLike} />
+          <img src={Comment} alt="" onClick={() => {
 
+            setCommentLoad(true);
+            setCommentLoads(!commentLoads)
 
+          }} />
+          <img src={Share} alt="" />
         </div>
-
-      </Modal>
-
-      <Modal
-        opened={deletes}
-        onClose={() => setDelete(false)}>
-        <div style={{ "textAlign": "center" }}>
-
-          <span> are you sure you want to delete the post?</span><br /><br />
-          <button style={{}} onClick={deletePost}>delete</button>
-
+        <span style={{ color: "var(--gray)", fontSize: '12px' }}>{likes} Likes</span>
+        <div className="detail">
+          <span><b>{data?.userId?.userName}</b></span>
+          <span> {data.desc}</span>
         </div>
-
-      </Modal>
-
-      <div className="detail" style={{ "display": "flex", "justifyContent": "space-between", "paddingBottom": "3px" }}>
         <div>
-          <span><img style={{ "width": "20px", }} src={data?.userId?.profilePicture ? data?.userId?.profilePicture : coverPicture} alt="" />  </span>
-          <span>{data?.userId?.firstName} {data?.userId?.lastName}</span>
+          {commentLoads && (
+            showComments.map((value) => {
+              return (<div><span><img style={{ "width": "20px" }} src={value?.userId?.profilePicture ? value?.userId?.profilePicture : coverPicture} alt="" /> </span> <b>{value.userId.userName}</b> <span>{value.comment}</span> </div>)
+
+            }))
+
+          }
+          {commentLoads && <Comments postId={data._id} setCommentLoad={setCommentLoad} />}
         </div>
-        <div>
-          <span className='icon' style={{}} onClick={() => {
-            setReport(!report)
-          }}><MoreVertIcon /> </span>
-        </div>
-
-
-
-
 
       </div>
-      {report ? <div className='Report' >
-        {userData._id === data?.userId?._id ? <div >
 
-          <div onClick={() => {
-            setDelete(true)
-          }}><DeleteForeverIcon /> Delete this post!</div>
-          <div onClick={() => {
-            setEdit(true)
-          }}><EditIcon /> Edit Post</div>
-        </div> : <div >
-          {/* <div onClick={savePosts}><SaveAltIcon /> Save later</div> */}
-
-          <div onClick={savePosts}><SaveAltIcon /> Save later</div>
-          <div onClick={() => {
-
-            setOpened(true)
-          }}><Report /> Report this post!</div>
-
-
-        </div>}
-
-      </div> : ""}
-
-
-
-      <img src={data.imageUrl} alt="" />
-      <div className="PostReact">
-        <img src={liked ? Heart : NotLike} alt="" onClick={handleLike} />
-        <img src={Comment} alt="" onClick={() => {
-
-          setCommentLoad(true);
-          setCommentLoads(!commentLoads)
-
-        }} />
-        <img src={Share} alt="" />
-      </div>
-      <span style={{ color: "var(--gray)", fontSize: '12px' }}>{likes} Likes</span>
-      <div className="detail">
-        <span><b>{data?.userId?.userName}</b></span>
-        <span> {data.desc}</span>
-      </div>
-      <div>
-        {commentLoads && (
-          showComments.map((value) => {
-            return (<div><span><img style={{ "width": "20px" }} src={value?.userId?.profilePicture?value?.userId?.profilePicture:coverPicture} alt="" /> </span> <b>{value.userId.userName}</b> <span>{value.comment}</span> </div>)
-
-          }))
-
-        }
-        {commentLoads && <Comments postId={data._id} setCommentLoad={setCommentLoad} />}
-      </div>
-
-    </div>
-
-  )
+    )
+  }
 }
 
 export default Post 
