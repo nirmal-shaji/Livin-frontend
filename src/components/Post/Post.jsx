@@ -9,7 +9,7 @@ import coverPicture from "../../img/defaultProfile.png"
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useDispatch, useSelector } from 'react-redux'
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
-
+import { toast } from 'react-hot-toast'
 import { savePost, reportPost, editPost } from '../../api/usersApi'
 import { deletePosts } from '../../redux/actions/userAction'
 import { likePost } from '../../api/postApi'
@@ -19,6 +19,7 @@ import { allComment } from '../../api/postApi'
 import { Modal } from '@mantine/core';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
+
 
 const Post = ({ data, id }) => {
   const dispatch = useDispatch()
@@ -36,6 +37,15 @@ const Post = ({ data, id }) => {
   console.log(data  )
 
   const deletePost = async () => {
+  
+    toast("Post Deleted Successfully",{
+           
+           style: {
+             borderRadius: "10px",
+             background: "#333",
+             color: "#fff",
+           },
+         })
     dispatch(deletePosts(id))
   }
   const savePosts = async () => {

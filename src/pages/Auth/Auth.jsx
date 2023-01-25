@@ -17,6 +17,7 @@ const Auth = () => {
     const [validation, setValidation] = useState(false);
     const dispatch = useDispatch();
     const loading = useSelector((state) => state.authReducer.loading);
+    const error = useSelector((state) => state.authReducer.error);
    
     const userDataChange=(event)=> {
         setUserData((prevState) => {
