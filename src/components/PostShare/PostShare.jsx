@@ -8,7 +8,8 @@ import { UilLocationPoint } from '@iconscout/react-unicons'
 import { UilSchedule } from '@iconscout/react-unicons'
 import { UilTimes } from '@iconscout/react-unicons'
 import { useSelector, useDispatch } from 'react-redux'
-import { postUpload ,textUpload} from '../../redux/actions/uploadActions'
+import { postUpload, textUpload } from '../../redux/actions/uploadActions'
+import {  toast} from 'react-hot-toast';
 import axios from 'axios'
 
 const PostShare = () => {
@@ -33,7 +34,23 @@ const PostShare = () => {
           desc: desc.current.value,
         };
     
-        if (image) {
+      if (image) {
+        if(!(image.type==="image/jpeg" || 
+        image.type==="image/png" ||
+        image.type==="image/webp"||
+        image.type==="image/jpg")
+        )
+        {
+         
+         return toast("oops! only support jpeg,png,jpg",{
+           icon: "🙄",
+           style: {
+             borderRadius: "10px",
+             background: "#333",
+             color: "#fff",
+           },
+         });
+        }
           const datas = new FormData();
           const filename = Date.now() + image.name;
           

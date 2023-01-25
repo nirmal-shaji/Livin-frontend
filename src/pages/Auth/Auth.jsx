@@ -17,6 +17,7 @@ const Auth = () => {
     const [validation, setValidation] = useState(false);
     const dispatch = useDispatch();
     const loading = useSelector((state) => state.authReducer.loading);
+   
     const userDataChange=(event)=> {
         setUserData((prevState) => {
            return({...prevState,[event.target.name]:event.target.value})
@@ -33,7 +34,7 @@ const Auth = () => {
            
         else {
             if (isSignUp) {
-                if (userData.firstName === ""||userData.lastName===""||userData.userName===""||userData.confirmPassword||userData.password) {
+                if (userData.firstName === ""||userData.lastName===""||userData.userName===""||userData.confirmPassword===""||userData.password==="") {
            setValidation(true) 
         }
                 userData.confirmPassword === userData.password ? dispatch(SignUp(userData)) : setIsConfirmPassword(false) 
@@ -71,6 +72,9 @@ const Auth = () => {
                         <h3>
                             {isSignUp ? 'Sign up ' : 'Login'}
                         </h3>
+                        <span style={{display:!error?'none':'block' ,color:'red',fontSize:"12px"}}>
+                           * Check the password and user-name you have entered
+                        </span>
                         <span style={{display:!validation?'none':'block' ,color:'red',fontSize:"12px"}}>
                            * Fields missing
                         </span>

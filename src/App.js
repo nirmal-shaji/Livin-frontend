@@ -9,7 +9,8 @@ import UsersList from "./pages/Admin/UsersList/UsersList";
 import AdminLogin from "./pages/Admin/AdminLogin/AdminLogin";
 import {Error} from "./pages/404/Error"
 import { useSelector } from "react-redux";
-import { BrowserRouter, Routes, Route ,Navigate} from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { Toaster } from "react-hot-toast";
 import PostList from "./pages/Admin/PostList/PostList";
 function App() {
   
@@ -19,7 +20,7 @@ function App() {
   return (
     <BrowserRouter>
     <div className="App">
-  
+    <Toaster position="top-center" reverseOrder={false} />
         <Routes>
         <Route path='/auth' element={ userData?<Home />:<Auth />} />
           <Route path='/profile' element={userData ? <Profile /> : <Auth />} />

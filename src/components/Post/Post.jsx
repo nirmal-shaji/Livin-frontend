@@ -33,6 +33,7 @@ const Post = ({ data, id }) => {
   const [opened, setOpened] = React.useState(false);
   const [deletes, setDelete] = useState(false);
   const [edit, setEdit] = useState(false);
+  console.log(data  )
 
   const deletePost = async () => {
     dispatch(deletePosts(id))
@@ -43,11 +44,13 @@ const Post = ({ data, id }) => {
   }
 
   const reportSubmit = async () => {
-
+    if (reportText) {
     const data = { userId: userData._id, reportText: reportText }
     await reportPost(id, data)
     setReportText("")
     setOpened(false)
+    }
+    
   }
   const editSubmit = async () => {
     //here in order to reduce the no of state i have actually used the  same state reportText 

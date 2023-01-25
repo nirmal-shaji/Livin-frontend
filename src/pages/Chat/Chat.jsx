@@ -48,7 +48,8 @@ const Chat = () => {
 //send messages 
   useEffect(() => {
     if (sendMessage!==null) {
-      socket.current.emit("sendMessage", sendMessage);}
+      socket.current.emit("sendMessage", sendMessage);
+    }
   }, [sendMessage]);
 
 
