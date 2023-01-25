@@ -13,7 +13,7 @@ const PostSide = ({location}) => {
   return (
     <div className='PostSide'>
       {location==='savedPosts'?<h5>Saved Posts</h5>:"" } 
-      {locations.pathname==='/home'?<PostShare/>:""}
+      {locations.pathname==='/'?<PostShare/>:""}
       { params.id===userData._id?<PostShare />:""}
       <Posts location={location} />
      
