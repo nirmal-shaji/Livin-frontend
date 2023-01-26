@@ -38,11 +38,11 @@ const Posts = ({ location }) => {
     if (location === 'savedPosts') {
 
         if (savedPosts[0]) {
-            savedPosts = savedPosts.map((post) => {
-                const data = users.find((value) => value._id === post.userId)
-                post.userId = data
-                return post
-            })
+            // savedPosts = savedPosts.map((post) => {
+            //     const data = users.find((value) => value._id === post.userId)
+            //     post.userId = data
+            //     return post
+            // })
             return (
                 <div className="Posts">
 
@@ -79,16 +79,16 @@ const Posts = ({ location }) => {
 
             })
         }
-        else {
+        // else {
 
 
-            fetchedPost = fetchedPost.map((post) => {
-                const data = users.find((value) => value._id === post.userId)
-                post.userId = data
-                return post
-            })
+        //     // fetchedPost = fetchedPost.map((post) => {
+        //     //     const data = users.find((value) => value._id === post.userId)
+        //     //     post.userId = data
+        //     //     return post
+        //     // })
 
-        }
+        // }
         //this is to display post along with userName
 
 

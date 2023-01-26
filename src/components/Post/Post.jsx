@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect} from 'react'
 import './Post.css'
 import Comment from "../../img/comment.png"
 import Share from "../../img/share.png"
@@ -10,7 +10,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useDispatch, useSelector } from 'react-redux'
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import { toast } from 'react-hot-toast'
-import { savePost, reportPost, editPost } from '../../api/usersApi'
+import { savePost, reportPost, editPost ,getUser} from '../../api/usersApi'
 import { deletePosts } from '../../redux/actions/userAction'
 import { likePost } from '../../api/postApi'
 
@@ -22,6 +22,7 @@ import EditIcon from '@mui/icons-material/Edit';
 
 
 const Post = ({ data, id }) => {
+  console.log(data,"this is post data")
   const dispatch = useDispatch()
   const { userData } = useSelector((state) => state.authReducer.authData);
   const [showComments, setShowComments] = useState([]);
@@ -34,8 +35,19 @@ const Post = ({ data, id }) => {
   const [opened, setOpened] = React.useState(false);
   const [deletes, setDelete] = useState(false);
   const [edit, setEdit] = useState(false);
+  const [usersData,setUsersData]=useState(null)
 
-
+  useEffect(() => {
+    const getUsers = async() => {
+      const datas = await getUser(data.userId)
+      console.log(datas, "inside useEFfect")
+      setUsersData(datas.data.userData)
+    }
+    getUsers()
+  
+   
+  }, [])
+  
   const deletePost = async () => {
   
 
@@ -61,6 +73,7 @@ const Post = ({ data, id }) => {
       },
     })
   }
+  console.log(usersData,"this is userssssdataaaaaaaaaaa")
 
   const reportSubmit = async () => {
     if (reportText) {
@@ -171,8 +184,8 @@ const Post = ({ data, id }) => {
 
         <div className="detail" style={{ "display": "flex", "justifyContent": "space-between", "paddingBottom": "3px" }}>
           <div>
-            <span><img style={{ "width": "20px", }} src={data?.userId?.profilePicture ? data?.userId?.profilePicture : coverPicture} alt="" />  </span>
-            <span>{data?.userId?.firstName} {data?.userId?.lastName}</span>
+            <span><img style={{ "width": "20px", }} src={usersData?.profilePicture ? usersData?.profilePicture : coverPicture} alt="" />  </span>
+            <span>{usersData?.firstName} {usersData?.lastName}</span>
           </div>
           <div>
             <span className='icon' style={{}} onClick={() => {
