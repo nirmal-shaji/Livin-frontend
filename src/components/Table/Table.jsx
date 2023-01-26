@@ -10,6 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import { blockUser, unBlockUser } from '../../api/adminApi';
 import { Modal, Button, Group } from '@mantine/core';
 import { useSetState } from '@mantine/hooks';
+import { toast } from 'react-hot-toast';
 
 
 
@@ -101,6 +102,14 @@ export default function ColumnGroupingTable({ data,setPageReload}) {
               setLoading(true);
               await blockUser(userId)
               setLoading(false)
+              toast("User Blocked",{
+           
+           style: {
+             borderRadius: "10px",
+             background: "#333",
+             color: "#fff",
+           },
+         })
               
               setOpened(false)
               setPageReload((prev)=>!prev)
@@ -112,6 +121,14 @@ export default function ColumnGroupingTable({ data,setPageReload}) {
                 setLoading(false)
                 
                 setOpened(false)
+                toast("User Unblocked",{
+           
+           style: {
+             borderRadius: "10px",
+             background: "#333",
+             color: "#fff",
+           },
+         })
                 setPageReload((prev)=>!prev)
               
                   }}>{loading?"loading":"unblock"}</button></>}

@@ -10,6 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import { useState } from 'react';
 import { deletePost } from '../../api/usersApi';
 import { Modal, Button, Group } from '@mantine/core';
+import { toast } from 'react-hot-toast';
 
 
 const columns = [
@@ -33,7 +34,7 @@ const columns = [
 
 export default function ColumGroupingTable({ data }) {
 
-  console.log(data,"data insider")
+  
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [opened, setOpened] = useState(false);
@@ -55,6 +56,14 @@ export default function ColumGroupingTable({ data }) {
  
   const remove = async(id) => {
     await deletePost(id)
+    toast("Post Removed",{
+           
+      style: {
+        borderRadius: "10px",
+        background: "#333",
+        color: "#fff",
+      }
+    })
     setOpened(false)
   }
   return (
