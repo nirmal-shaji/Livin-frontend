@@ -14,6 +14,7 @@ function Layout({ children }) {
   const [opened, setOpened] = useState(false);
   const dispatch = useDispatch()
   const [collapsed, setCollapsed] = useState(false);
+  const [notificationReload,setNotifictionReload]=useState(false)
   const navigate = useNavigate();
   const location = useLocation();
   const adminMenu = [
@@ -42,10 +43,11 @@ function Layout({ children }) {
     noti();
 
 
-  }, [])
+  }, [notificationReload])
   console.log(notification)
   const deleteNotification = async () => {
     await deleteAdminNotification();
+    setNotifictionReload(prev => !prev);
     setOpened(false)
   }
 
