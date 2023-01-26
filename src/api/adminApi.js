@@ -19,3 +19,4 @@ export const removePost = (id) => API.get(`/api/v1/admin/post/${id}`);
 export const adminDashboard = (id) => API.get('/api/v1/admin/dashboard');
 export const adminNotification = () => API.get('/api/v1/admin/notification');
 export const deleteAdminNotification = () => API.get('/api/v1/admin/notification/delete');
+export const adminDeletePost = (postId) => API.get(`/api/v1/admin/deletePost/${postId}`);

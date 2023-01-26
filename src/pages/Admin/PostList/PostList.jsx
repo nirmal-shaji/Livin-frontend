@@ -6,7 +6,8 @@ import { postsList } from '../../../api/adminApi'
 import { useEffect } from 'react'
 import { useState } from 'react'
 const PostList = () => {
-const [postData,setPostData]=useState([])
+  const [postData, setPostData] = useState([])
+  const [postReload,setPostReload]=useState(false)
   useEffect(() => {
     const postList = async() => {
        const {data} = await postsList();
@@ -15,11 +16,11 @@ const [postData,setPostData]=useState([])
     postList();
   
     
-  }, [])
+  }, [postReload])
   
   return (
       <Layout>
-      <ColumGroupingTable data={postData} />
+      <ColumGroupingTable data={postData} setPostReload={setPostReload} />
   </Layout>
   )
 }

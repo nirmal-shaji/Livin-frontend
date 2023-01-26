@@ -8,7 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { useState } from 'react';
-import { deletePost } from '../../api/usersApi';
+import { adminDeletePost } from '../../api/adminApi';
 import { Modal, Button, Group } from '@mantine/core';
 import { toast } from 'react-hot-toast';
 
@@ -32,7 +32,7 @@ const columns = [
 
 
 
-export default function ColumGroupingTable({ data }) {
+export default function ColumGroupingTable({ data,setPostReload }) {
 
   
   const [page, setPage] = React.useState(0);
@@ -55,7 +55,8 @@ export default function ColumGroupingTable({ data }) {
 
  
   const remove = async(id) => {
-    await deletePost(id)
+    await adminDeletePost(id)
+    setPostReload((prev) => !prev);
     toast("Post Removed",{
            
       style: {
