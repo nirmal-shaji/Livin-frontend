@@ -3,9 +3,9 @@ const API = axios.create({ baseURL: 'https://livin.audiograms.xyz' });
 
 
 API.interceptors.request.use((req) => {
-    if (localStorage.getItem("profile")) {
+    if (localStorage.getItem("adminProfile")) {
       req.headers.Authorization = `Bearer ${JSON.parse(
-        localStorage.getItem("profile")
+        localStorage.getItem("adminProfile")
       ).token}`;
     }
     return req;
