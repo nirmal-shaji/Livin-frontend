@@ -199,7 +199,7 @@ const Post = ({ data, id }) => {
 
         </div>
         {report ? <div className='Report' >
-          {userData._id === data?.userId?._id ? <div >
+          {userData._id === usersData._id ? <div >
 
             <div onClick={() => {
               setDelete(true)
